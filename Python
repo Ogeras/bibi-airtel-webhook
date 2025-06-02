@@ -7,7 +7,7 @@ def airtel_webhook():
     data = request.json
     print("Received data:", data)
 
-    # You can add logic here to send download link after successful payment
+    # TODO: Add logic to verify payment and send download link
     return jsonify({"status": "success"}), 200
 
 if __name__ == '__main__':
