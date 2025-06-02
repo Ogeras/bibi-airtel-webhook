@@ -2,13 +2,21 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-@app.route('/webhook', methods=['POST'])
-def airtel_webhook():
-    data = request.json
-    print("Received data:", data)
+@app.route('/', methods=['GET'])
+def index():
+    return 'Bibi Airtel Webhook is Live!', 200
 
-    # You can add logic here to send download link after successful payment
-    return jsonify({"status": "success"}), 200
+@app.route('/airtel-webhook', methods=['POST'])
+def webhook():
+    data = request.get_json()
 
-if __name__ == '__main__':
-    app.run()
+    if not data:
+        return jsonify({"error": "Invalid JSON"}), 400
+
+    print("Received Airtel webhook data:", data)
+
+    # TODO: Process the Airtel webhook payload here...
+
+    return jsonify({"message": "Webhook received successfully"}), 200
+
+# Do NOT include app.run(debug=True)
